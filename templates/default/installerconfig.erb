@@ -1,0 +1,37 @@
+PARTITIONS=da1
+DISTRIBUTIONS='<%= @distributions %>'
+BSDINSTALL_DISTDIR='<%= @distdir %>'
+BSDINSTALL_DISTSITE='<%= @distsite %>'
+BSDINSTALL_CHROOT='<%= @chroot %>'
+
+#!/bin/sh
+
+set -e
+
+{
+  echo 'ifconfig_vtnet0=DHCP'
+  echo 'sshd_enable=YES'
+  echo 'sendmail_enable=NONE'
+  echo 'sendmail_msp_queue_enable=NO'
+  echo 'sendmail_outbound_enable=NO'
+  echo 'sendmail_submit_enable=NO'
+} >> /etc/rc.conf
+{
+  echo 'beastie_disable=YES'
+  echo 'autoboot_delay=0'
+} >> /boot/loader.conf
+
+sed -e 's/da1p/da0p/' -i '' /etc/fstab
+sed -e 's/^\(ttyv[1234567][ 	].*[ 	]\)on[ 	]/\1off/' \
+    -e 's/^\(ttyu0[ 	].*[ 	]\)onifconsole/\1on /' \
+    -i '' /etc/ttys
+<% if not @install.empty? %>
+
+export ASSUME_ALWAYS_YES=yes
+pkg update
+pkg install <%= @install.join(' ') %>
+<% end %>
+
+echo kitchen | pw usermod root -h 0
+echo kitchen | pw useradd kitchen -c 'Kitchen User' -m -s /bin/sh -h 0
+echo 'kitchen ALL=(ALL) NOPASSWD: ALL' > /usr/local/etc/sudoers.d/kitchen

@@ -1,0 +1,3 @@
+<% @fstab.each do |entry| %>
+<%= entry['device'] %> <%= entry['mountpoint'] %> <%= entry['fstype'] %> defaults,<%= entry['options'].join(',') %> <%= entry['freq'].to_s %> <%= entry['passno'].to_s %>
+<% end %>

@@ -1,0 +1,9 @@
+auto lo
+iface lo inet loopback
+
+auto eth0
+iface eth0 inet manual
+
+auto brU
+iface brU inet dhcp
+  bridge_ports eth0

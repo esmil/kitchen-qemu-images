@@ -1,0 +1,9 @@
+sed -e '/^GRUB_TIMEOUT=/cGRUB_TIMEOUT=<%= node['image']['grub']['timeout'] %>' \
+    -e '/^GRUB_CMDLINE_LINUX_DEFAULT=/cGRUB_CMDLINE_LINUX_DEFAULT="<%= node['image']['grub']['cmdline-default'] %>"' \
+    -i /etc/default/grub
+
+grub-install '<%= node['image']['blockdev'] %>'
+update-grub
+
+sed -e "s/set root='hd1,/set root='hd0,/g" \
+    -i /boot/grub/grub.cfg

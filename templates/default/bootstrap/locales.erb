@@ -1,0 +1,4 @@
+<% if node['image']['debootstrap']['distro'] == 'debian' %>
+echo 'locales locales/default_environment_locale select <%= node['image']['locale']['lang'] %>' | debconf-set-selections
+<% end %>
+dpkg-reconfigure -fnoninteractive locales

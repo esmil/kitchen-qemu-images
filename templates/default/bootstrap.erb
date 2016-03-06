@@ -1,0 +1,21 @@
+#!/bin/sh
+
+set -e
+set -x
+
+for i in /root/bootstrap.d/??-*; do
+  if test -x "$i"; then
+    "$i"
+  else
+    . "$i"
+  fi
+done
+
+echo 'root:kitchen' | chpasswd
+
+getent passwd kitchen || useradd -c 'Kitchen User' -m -U -s /bin/bash kitchen
+echo 'kitchen:kitchen' | chpasswd
+echo 'kitchen ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/kitchen
+
+rm -rf /root/bootstrap.d
+rm -f /root/bootstrap

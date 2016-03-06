@@ -1,0 +1,10 @@
+<% if @locale['lang'] %>
+LANG=<%= @locale['lang'] %>
+<% else %>
+#LANG=C
+<% end %>
+<% ['lc_ctype','lc_numeric','lc_time','lc_collate','lc_monetary','lc_messages','lc_paper','lc_name','lc_address','lc_telephone','lc_measurement','lc_identification','lc_all'].each do |key| %>
+<% if @locale[key] %>
+<%= key.upcase %>=<%= @locale[key] %>
+<% end %>
+<% end %>
