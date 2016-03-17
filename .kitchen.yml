@@ -14,7 +14,7 @@ suites:
   - name: jessie
     driver:
       image:
-        - file: ../jessie.qcow2
+        - file: jessie.qcow2
         - file: /tmp/new.qcow2
           snapshot: false
     run_list:
@@ -27,7 +27,7 @@ suites:
   - name: wheezy
     driver:
       image:
-        - file: ../wheezy.qcow2
+        - file: wheezy.qcow2
         - file: /tmp/new.qcow2
           snapshot: false
     run_list:
@@ -40,7 +40,7 @@ suites:
   - name: trusty
     driver:
       image:
-        - file: ../trusty.qcow2
+        - file: trusty.qcow2
         - file: /tmp/new.qcow2
           snapshot: false
     run_list:
@@ -54,7 +54,7 @@ suites:
     driver:
       display: sdl
       image:
-        - file: ../freebsd10.qcow2
+        - file: freebsd10.qcow2
         - file: /tmp/new.qcow2
           snapshot: false
     run_list:
