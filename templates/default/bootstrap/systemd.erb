@@ -1,0 +1,9 @@
+<% node['image']['systemd'].select{|_,v| v == 'disable'}.keys.each do |service| %>
+systemctl disable '<%= service %>'
+<% end %>
+<% node['image']['systemd'].select{|_,v| v == 'enable'}.keys.each do |service| %>
+systemctl enable '<%= service %>'
+<% end %>
+<% node['image']['systemd'].select{|_,v| v == 'mask'}.keys.each do |service| %>
+systemctl mask '<%= service %>'
+<% end %>

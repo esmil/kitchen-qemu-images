@@ -16,28 +16,16 @@
 
 root = node['image']['mountpoint']
 
-link "#{root}/etc/systemd/system/getty.target.wants/getty@tty1.service" do
-  to '/lib/systemd/system/getty@.service'
-  action :delete
-end
-
-link "#{root}/etc/systemd/system/getty.target.wants/getty@tty2.service" do
-  to '/lib/systemd/system/getty@.service'
-  action :create
-end
-
-link "#{root}/etc/systemd/system/getty.target.wants/serial-getty@ttyS0.service" do
-  to '/lib/systemd/system/serial-getty@.service'
-  action :create
-end
-
-link "#{root}/etc/systemd/system/syslog.socket" do
-  to '/dev/null'
+template "#{root}/root/bootstrap.d/50-systemd.sh" do
+  source 'bootstrap/systemd.erb'
+  owner 'root'
+  group 'root'
+  mode 0644
   action :create
 end
 
 link "#{root}/etc/systemd/system/default.target" do
-  to '../lib/systemd/system/multi-user.target'
+  to '/lib/systemd/system/multi-user.target'
   action :create
 end
 

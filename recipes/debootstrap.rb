@@ -101,7 +101,7 @@ directory "#{root}/root/bootstrap.d" do
 end
 
 template "#{root}/root/bootstrap.d/20-packages.sh" do
-  source 'bootstrap/packages.erb'
+  source 'bootstrap/apt.erb'
   owner 'root'
   group 'root'
   mode 0644

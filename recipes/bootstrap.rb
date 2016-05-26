@@ -50,10 +50,16 @@ bash 'bootstrap' do
 mount --bind /dev  '#{root}/dev'
 mount --bind /proc '#{root}/proc'
 mount --bind /sys  '#{root}/sys'
-mount --bind /etc/resolv.conf '#{root}/etc/resolv.conf'
+sed -e '/^hosts:/chosts: files dns' -i.old '#{root}/etc/nsswitch.conf'
+mv '#{root}/etc/resolv.conf' '#{root}/etc/resolv.conf.old'
+touch '#{root}/etc/resolv.conf'
+mount --bind "$(readlink -f /etc/resolv.conf)" '#{root}/etc/resolv.conf'
 chroot '#{root}' /root/bootstrap 2>&1
 status="$?"
 umount '#{root}/etc/resolv.conf'
+rm '#{root}/etc/nsswitch.conf' '#{root}/etc/resolv.conf'
+mv '#{root}/etc/nsswitch.conf.old' '#{root}/etc/nsswitch.conf'
+mv '#{root}/etc/resolv.conf.old' '#{root}/etc/resolv.conf'
 umount '#{root}/sys'
 umount '#{root}/proc'
 umount '#{root}/dev'
