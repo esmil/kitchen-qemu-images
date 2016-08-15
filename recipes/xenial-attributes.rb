@@ -24,7 +24,6 @@ node.default['image']['grub']['cmdline-default'] = "rootfstype=#{node['image']['
 
 node.default['image']['packages']['iproute2']            = 'install'
 node.default['image']['packages']['ifupdown']            = 'install'
-#node.default['image']['packages']['net-tools']           = 'install'
 node.default['image']['packages']['bridge-utils']        = 'install'
 node.default['image']['packages']['isc-dhcp-client']     = 'install'
 node.default['image']['packages']['sudo']                = 'install'

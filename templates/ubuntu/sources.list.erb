@@ -1,0 +1,3 @@
+deb <%= node['image']['debootstrap']['mirror'] %>/ubuntu/ <%= node['image']['debootstrap']['codename'] %> <%= node['image']['debootstrap']['components'].join(' ') %>
+deb <%= node['image']['debootstrap']['mirror'] %>/ubuntu/ <%= node['image']['debootstrap']['codename'] %>-security <%= node['image']['debootstrap']['components'].join(' ') %>
+deb <%= node['image']['debootstrap']['mirror'] %>/ubuntu/ <%= node['image']['debootstrap']['codename'] %>-updates <%= node['image']['debootstrap']['components'].join(' ') %>

@@ -72,7 +72,6 @@ file "#{root}/etc/resolv.conf" do
 end
 
 template "#{root}/etc/apt/sources.list" do
-  source "sources.#{node['image']['debootstrap']['distro']}.list.erb"
   owner 'root'
   group 'root'
   mode 0644
