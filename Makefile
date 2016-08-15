@@ -17,7 +17,7 @@ $(WORKIMG):
 	$(QEMU_IMG) convert -O qcow2 -f qcow2 '$<' '$@'
 
 $(targets): $(WORKIMG)
-	$(KITCHEN) converge $@-default -l debug
+	$(KITCHEN) converge $@-default
 	$(KITCHEN) destroy  $@-default
 	$(QEMU_IMG) convert -O qcow2 -f qcow2 '$(WORKIMG)' '../$@.qcow2'
 
