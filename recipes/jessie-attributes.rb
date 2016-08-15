@@ -53,5 +53,6 @@ node.default['image']['systemd']['getty@tty1.service']         = 'disable'
 node.default['image']['systemd']['getty@tty2.service']         = 'enable'
 node.default['image']['systemd']['serial-getty@ttyS0.service'] = 'enable'
 node.default['image']['systemd']['syslog.socket']              = 'mask'
+node.default['image']['systemd']['hwclock-save.service']       = 'disable'
 
 # vim: set ts=2 sw=2 et:
