@@ -20,7 +20,7 @@ OLDPATH="$PATH"
 export PATH="/root/fake:$PATH"
 export DEBIAN_FRONTEND=noninteractive
 
-apt-get --yes upgrade
+apt-get --yes dist-upgrade
 <% install = node['image']['packages'].select{|_,v| v == 'install'}.keys %>
 <% if not install.empty? %>
 apt-get --yes install <%= install.join(' ') %>
