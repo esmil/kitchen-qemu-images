@@ -1,0 +1,9 @@
+auto lo
+iface lo inet loopback
+
+auto <%= @ifname %>
+iface <%= @ifname %> inet manual
+
+auto brU
+iface brU inet dhcp
+  bridge_ports <%= @ifname %>

@@ -86,10 +86,17 @@ cookbook_file "#{root}/etc/apt/apt.conf.d/06norecommends" do
   action :create
 end
 
-cookbook_file "#{root}/etc/network/interfaces" do
+directory "#{root}/etc/network" do
+  owner 'root'
+  group 'root'
+  mode 0755
+end
+
+template "#{root}/etc/network/interfaces" do
   owner 'root'
   group 'root'
   mode 0644
+  variables :ifname => (node['image']['debootstrap']['ifname'] || 'eth0')
   action :create
 end
 

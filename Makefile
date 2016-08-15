@@ -7,7 +7,7 @@ SIZE = 4G
 
 WORKIMG = /tmp/new.qcow2
 
-targets = wheezy jessie trusty freebsd10
+targets = wheezy jessie trusty xenial freebsd10
 
 $(WORKIMG):
 	$(QEMU_IMG) create -f qcow2 '$@' $(SIZE)
