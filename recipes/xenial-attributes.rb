@@ -22,6 +22,7 @@ node.default['image']['debootstrap']['ifname']     = 'ens3'
 
 node.default['image']['grub']['cmdline-default'] = "rootfstype=#{node['image']['rootfstype']} rootwait"
 
+node.default['image']['packages']['libpam-systemd']      = 'install'
 node.default['image']['packages']['iproute2']            = 'install'
 node.default['image']['packages']['ifupdown']            = 'install'
 node.default['image']['packages']['bridge-utils']        = 'install'
@@ -30,7 +31,6 @@ node.default['image']['packages']['sudo']                = 'install'
 node.default['image']['packages']['ca-certificates']     = 'install'
 node.default['image']['packages']['curl']                = 'install'
 node.default['image']['packages']['openssh-server']      = 'install'
-node.default['image']['packages']['acpi-support']        = 'install'
 node.default['image']['packages']['grub-pc']             = 'install'
 node.default['image']['packages']['linux-image-virtual'] = 'install'
 
