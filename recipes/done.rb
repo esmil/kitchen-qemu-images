@@ -16,6 +16,10 @@
 
 root = node['image']['mountpoint']
 
+execute 'zerofill' do
+  command "dd if=/dev/zero of='#{root}/file' bs=8M; rm -f '#{root}/file'"
+end
+
 if node['image']['uefi']
   execute 'fstrim' do
     command ['fstrim', "#{root}/boot/efi"]
@@ -24,8 +28,8 @@ if node['image']['uefi']
 end
 
 execute 'fstrim' do
-  command ['fstrim', node['image']['mountpoint']]
-  notifies :umount, "mount[#{node['image']['mountpoint']}]", :immediately
+  command ['fstrim', root]
+  notifies :umount, "mount[#{root}]", :immediately
 end
 
 # vim: set ts=2 sw=2 et:

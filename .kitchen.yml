@@ -16,7 +16,7 @@ suites:
       image:
         - file: jessie.qcow2
         - file: /tmp/new.qcow2
-          snapshot: false
+          snapshot: off
     run_list:
       - recipe[kitchen-qemu-images::jessie-attributes]
       - recipe[kitchen-qemu-images::format]
@@ -29,7 +29,7 @@ suites:
       image:
         - file: wheezy.qcow2
         - file: /tmp/new.qcow2
-          snapshot: false
+          snapshot: off
     run_list:
       - recipe[kitchen-qemu-images::wheezy-attributes]
       - recipe[kitchen-qemu-images::format]
@@ -42,7 +42,7 @@ suites:
       image:
         - file: trusty.qcow2
         - file: /tmp/new.qcow2
-          snapshot: false
+          snapshot: off
     run_list:
       - recipe[kitchen-qemu-images::trusty-attributes]
       - recipe[kitchen-qemu-images::format]
@@ -55,7 +55,7 @@ suites:
       image:
         - file: xenial.qcow2
         - file: /tmp/new.qcow2
-          snapshot: false
+          snapshot: off
     run_list:
       - recipe[kitchen-qemu-images::xenial-attributes]
       - recipe[kitchen-qemu-images::format]
@@ -69,7 +69,7 @@ suites:
       image:
         - file: freebsd10.qcow2
         - file: /tmp/new.qcow2
-          snapshot: false
+          snapshot: off
     run_list:
       - recipe[kitchen-qemu-images::freebsd10-attributes]
       - recipe[kitchen-qemu-images::bsdinstall]
@@ -82,4 +82,4 @@ suites:
       display: sdl
       image:
         - file: /tmp/new.qcow2
-          snapshot: false
+          snapshot: off
