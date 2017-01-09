@@ -17,7 +17,7 @@
 node.default['image']['bsdinstall']['distributions'] = 'kernel.txz base.txz'
 node.default['image']['bsdinstall']['distdir']       = '/tmp'
 node.default['image']['bsdinstall']['distsite']      =
-  'ftp://ftp.freebsd.org/pub/FreeBSD/releases/amd64/10.2-RELEASE'
+  'ftp://ftp.freebsd.org/pub/FreeBSD/releases/amd64/10.3-RELEASE'
 node.default['image']['bsdinstall']['chroot']        = '/mnt'
 
 node.default['image']['packages']['ca_root_nss'] = 'install'
