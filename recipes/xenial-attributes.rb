@@ -33,6 +33,7 @@ node.default['image']['packages']['curl']                = 'install'
 node.default['image']['packages']['openssh-server']      = 'install'
 node.default['image']['packages']['grub-pc']             = 'install'
 node.default['image']['packages']['linux-image-virtual'] = 'install'
+node.default['image']['packages']['net-tools']           = 'install'
 
 node.default['image']['packages']['makedev']             = 'purge'
 
