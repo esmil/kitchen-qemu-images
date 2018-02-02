@@ -11,6 +11,19 @@ platforms:
 #      display: sdl
 
 suites:
+  - name: stretch
+    driver:
+      image:
+        - file: stretch.qcow2
+        - file: /tmp/new.qcow2
+          snapshot: off
+    run_list:
+      - recipe[kitchen-qemu-images::stretch-attributes]
+      - recipe[kitchen-qemu-images::format]
+      - recipe[kitchen-qemu-images::debootstrap]
+      - recipe[kitchen-qemu-images::stretch]
+      - recipe[kitchen-qemu-images::bootstrap]
+      - recipe[kitchen-qemu-images::done]
   - name: jessie
     driver:
       image:
