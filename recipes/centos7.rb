@@ -1,5 +1,5 @@
 # This file is part of kitchen-qemu-images.
-# Copyright 2018 Emil Renner Berthing <esmil@esmil.dk>
+# Copyright 2016,2018 Emil Renner Berthing <esmil@esmil.dk>
 #
 # kitchen-qemu-images is free software: you can redistribute it and/or
 # modify it under the terms of the GNU General Public License as published
@@ -24,6 +24,14 @@ template "#{root}/root/bootstrap.d/50-systemd.sh" do
   action :create
 end
 
+template "#{root}/etc/locale.conf" do
+  owner 'root'
+  group 'root'
+  mode 0644
+  variables :locale => node['image']['locale']
+  action :create
+end
+
 directory "#{root}/etc/systemd/network" do
   owner 'root'
   group 'root'
@@ -31,7 +39,7 @@ directory "#{root}/etc/systemd/network" do
   action :create
 end
 
-['10-ens3.network','10-brU.netdev','10-brU.network'].each do |file|
+['10-eth0.network','10-brU.netdev','10-brU.network'].each do |file|
   cookbook_file "#{root}/etc/systemd/network/#{file}" do
     owner 'root'
     group 'root'
@@ -46,6 +54,10 @@ execute 'Use systemd-resolved' do
     '-e', 's/^\(hosts:[ \t]*\).*/\1files resolve [!UNAVAIL=return] dns myhostname/',
     '-i', "#{root}/etc/nsswitch.conf"
   ]
+end
+
+file "#{root}/etc/nsswitch.conf.bak" do
+  action :delete
 end
 
 link "#{root}/etc/resolv.conf" do

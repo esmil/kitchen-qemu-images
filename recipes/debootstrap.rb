@@ -131,6 +131,7 @@ file "#{root}/root/bootstrap.d/80-tzdata.sh" do
 end
 
 template "#{root}/etc/default/locale" do
+  source 'locale.conf.erb'
   owner 'root'
   group 'root'
   mode 0644

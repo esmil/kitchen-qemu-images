@@ -1,0 +1,9 @@
+yum -y upgrade
+
+<% install = node['image']['packages'].select{|_,v| v == 'install'}.keys %>
+<% if not install.empty? %>
+yum -y install <%= install.join(' ') %>
+<% end %>
+
+yum -y clean all
+rm -rf /var/cache/yum
