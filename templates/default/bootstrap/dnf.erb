@@ -1,0 +1,15 @@
+echo 'install_weak_deps=False' >> /etc/dnf/dnf.conf
+
+dnf -y upgrade
+
+<% install = node['image']['packages'].select{|_,v| v == 'install'}.keys %>
+<% if not install.empty? %>
+dnf -y install <%= install.join(' ') %>
+<% end %>
+
+<% remove = node['image']['packages'].select{|_,v| v == 'remove'}.keys %>
+<% if not remove.empty? %>
+dnf -y remove <%= remove.join(' ') %>
+<% end %>
+
+dnf -y clean all

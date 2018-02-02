@@ -1,0 +1,9 @@
+cat > /etc/default/grub <<EOF
+GRUB_TIMEOUT=<%= node['image']['grub']['timeout'] %>
+GRUB_CMDLINE_LINUX_DEFAULT='<%= node['image']['grub']['cmdline-default'] %>'
+EOF
+
+grub2-install '<%= node['image']['blockdev'] %>'
+grub2-mkconfig -o /boot/grub2/grub.cfg
+sed -e "s/set root='hd1,/set root='hd0,/g" \
+    -i /boot/grub2/grub.cfg

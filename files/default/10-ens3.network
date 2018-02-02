@@ -2,4 +2,7 @@
 Name=ens3
 
 [Network]
+DHCP=no
+IPv6AcceptRA=no
+LinkLocalAddressing=no
 Bridge=brU
