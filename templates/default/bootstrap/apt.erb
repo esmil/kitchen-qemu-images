@@ -1,11 +1,17 @@
 #!/bin/sh
 
+export LC_ALL=C
+export DEBIAN_FRONTEND=noninteractive
+
+echo 'debconf debconf/frontend select Readline' | debconf-set-selections
+echo 'debconf debconf/priority select low' | debconf-set-selections
+
 <% purge = node['image']['packages'].select{|_,v| v == 'purge'}.keys %>
 <% if not purge.empty? %>
 apt-get --yes --ignore-missing --purge autoremove <%= purge.join(' ') %>
 <% end %>
 
-apt-get --yes update
+apt-get -y update
 
 mkdir /root/fake
 ln -s /bin/true /root/fake/initctl
@@ -18,13 +24,13 @@ ln -s /bin/true /root/fake/service
 
 OLDPATH="$PATH"
 export PATH="/root/fake:$PATH"
-export DEBIAN_FRONTEND=noninteractive
 
-apt-get --yes dist-upgrade
+apt-get -y -o 'Dpkg::Options::=--force-confnew' dist-upgrade
 <% install = node['image']['packages'].select{|_,v| v == 'install'}.keys %>
 <% if not install.empty? %>
-apt-get --yes install <%= install.join(' ') %>
+apt-get -y install <%= install.join(' ') %>
 <% end %>
 export PATH="$OLDPATH"
 rm -rf /root/fake
-apt-get --yes clean
+
+apt-get -y clean

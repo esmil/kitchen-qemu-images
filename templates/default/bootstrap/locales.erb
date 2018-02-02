@@ -1,4 +1,11 @@
 <% if node['image']['debootstrap']['distro'] == 'debian' %>
+cat > /etc/locale.gen <<EOF
+<% node['image']['locale']['generate'].each do |line| %>
+<%= line %>
+<% end %>
+EOF
+echo 'locales locales/locales_to_be_generated multiselect <%= node['image']['locale']['generate'].join(', ') %>,' | debconf-set-selections
+dpkg-reconfigure -fnoninteractive locales
 echo 'locales locales/default_environment_locale select <%= node['image']['locale']['lang'] %>' | debconf-set-selections
 <% end %>
 dpkg-reconfigure -fnoninteractive locales

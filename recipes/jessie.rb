@@ -1,5 +1,5 @@
 # This file is part of kitchen-qemu-images.
-# Copyright 2016 Emil Renner Berthing <esmil@esmil.dk>
+# Copyright 2016,2018 Emil Renner Berthing <esmil@esmil.dk>
 #
 # kitchen-qemu-images is free software: you can redistribute it and/or
 # modify it under the terms of the GNU General Public License as published
@@ -26,6 +26,20 @@ end
 
 link "#{root}/etc/systemd/system/default.target" do
   to '/lib/systemd/system/multi-user.target'
+  action :create
+end
+
+directory "#{root}/etc/network" do
+  owner 'root'
+  group 'root'
+  mode 0755
+end
+
+template "#{root}/etc/network/interfaces" do
+  owner 'root'
+  group 'root'
+  mode 0644
+  variables :ifname => (node['image']['debootstrap']['ifname'] || 'eth0')
   action :create
 end
 

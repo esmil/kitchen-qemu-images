@@ -1,5 +1,5 @@
 # This file is part of kitchen-qemu-images.
-# Copyright 2016 Emil Renner Berthing <esmil@esmil.dk>
+# Copyright 2016,2018 Emil Renner Berthing <esmil@esmil.dk>
 #
 # kitchen-qemu-images is free software: you can redistribute it and/or
 # modify it under the terms of the GNU General Public License as published
@@ -16,7 +16,9 @@
 
 root = node['image']['mountpoint']
 
-apt_update 'update'
+execute 'apt-get update' do
+  command ['apt-get', '-q', 'update']
+end
 
 package 'debootstrap' do
   action :install
@@ -87,20 +89,6 @@ cookbook_file "#{root}/etc/apt/apt.conf.d/06norecommends" do
   action :create
 end
 
-directory "#{root}/etc/network" do
-  owner 'root'
-  group 'root'
-  mode 0755
-end
-
-template "#{root}/etc/network/interfaces" do
-  owner 'root'
-  group 'root'
-  mode 0644
-  variables :ifname => (node['image']['debootstrap']['ifname'] || 'eth0')
-  action :create
-end
-
 directory "#{root}/root/bootstrap.d" do
   owner 'root'
   group 'root'
@@ -116,8 +104,7 @@ template "#{root}/root/bootstrap.d/20-packages.sh" do
   action :create
 end
 
-if node['image']['packages']['grub-pc'] == 'include' ||
-   node['image']['packages']['grub-pc'] == 'install'
+if ['include','install'].include? node['image']['packages']['grub-pc']
   template "#{root}/root/bootstrap.d/30-grub.sh" do
     source 'bootstrap/grub.erb'
     owner 'root'
@@ -140,14 +127,6 @@ file "#{root}/root/bootstrap.d/80-tzdata.sh" do
   owner 'root'
   group 'root'
   mode 0644
-  action :create
-end
-
-file "#{root}/etc/locale.gen" do
-  owner 'root'
-  group 'root'
-  mode 0644
-  content Array.new(node['image']['locale']['generate']).push('').join("\n")
   action :create
 end
 

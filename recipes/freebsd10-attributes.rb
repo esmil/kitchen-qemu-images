@@ -1,5 +1,5 @@
 # This file is part of kitchen-qemu-images.
-# Copyright 2016 Emil Renner Berthing <esmil@esmil.dk>
+# Copyright 2016,2018 Emil Renner Berthing <esmil@esmil.dk>
 #
 # kitchen-qemu-images is free software: you can redistribute it and/or
 # modify it under the terms of the GNU General Public License as published
@@ -17,7 +17,7 @@
 node.default['image']['bsdinstall']['distributions'] = 'kernel.txz base.txz'
 node.default['image']['bsdinstall']['distdir']       = '/tmp'
 node.default['image']['bsdinstall']['distsite']      =
-  'ftp://ftp.freebsd.org/pub/FreeBSD/releases/amd64/10.3-RELEASE'
+  'ftp://ftp.freebsd.org/pub/FreeBSD/releases/amd64/10.4-RELEASE'
 node.default['image']['bsdinstall']['chroot']        = '/mnt'
 
 node.default['image']['packages']['ca_root_nss'] = 'install'

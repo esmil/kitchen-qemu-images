@@ -1,5 +1,5 @@
 # This file is part of kitchen-qemu-images.
-# Copyright 2016 Emil Renner Berthing <esmil@esmil.dk>
+# Copyright 2016,2018 Emil Renner Berthing <esmil@esmil.dk>
 #
 # kitchen-qemu-images is free software: you can redistribute it and/or
 # modify it under the terms of the GNU General Public License as published
@@ -17,40 +17,36 @@
 node.default['image']['debootstrap']['distro']     = 'debian'
 node.default['image']['debootstrap']['codename']   = 'jessie'
 node.default['image']['debootstrap']['components'] = ['main','contrib','non-free']
-node.default['image']['debootstrap']['mirror']     = 'http://mirror.one.com'
+node.default['image']['debootstrap']['mirror']     = 'https://deb.debian.org'
 
 node.default['image']['grub']['cmdline-default'] = "rootfstype=#{node['image']['rootfstype']} rootwait"
 
-node.default['image']['packages']['libpam-systemd']    = 'install'
-node.default['image']['packages']['dbus']              = 'install'
-node.default['image']['packages']['locales']           = 'install'
-node.default['image']['packages']['iproute2']          = 'install'
-node.default['image']['packages']['ifupdown']          = 'install'
-node.default['image']['packages']['bridge-utils']      = 'install'
-node.default['image']['packages']['isc-dhcp-client']   = 'install'
-node.default['image']['packages']['sudo']              = 'install'
-node.default['image']['packages']['ca-certificates']   = 'install'
-node.default['image']['packages']['wget']              = 'install'
-node.default['image']['packages']['openssh-server']    = 'install'
-node.default['image']['packages']['grub-pc']           = 'install'
-node.default['image']['packages']['linux-image-amd64'] = 'install'
+node.default['image']['packages']['ca-certificates']     = 'include'
+node.default['image']['packages']['apt-utils']           = 'include'
+node.default['image']['packages']['apt-transport-https'] = 'include'
+
+node.default['image']['packages']['perl-modules']        = 'install'
+node.default['image']['packages']['libpam-systemd']      = 'install'
+node.default['image']['packages']['dbus']                = 'install'
+node.default['image']['packages']['locales']             = 'install'
+node.default['image']['packages']['iproute2']            = 'install'
+node.default['image']['packages']['ifupdown']            = 'install'
+node.default['image']['packages']['bridge-utils']        = 'install'
+node.default['image']['packages']['isc-dhcp-client']     = 'install'
+node.default['image']['packages']['sudo']                = 'install'
+node.default['image']['packages']['wget']                = 'install'
+node.default['image']['packages']['openssh-server']      = 'install'
+node.default['image']['packages']['grub-pc']             = 'install'
+node.default['image']['packages']['linux-image-amd64']   = 'install'
+node.default['image']['packages']['python']              = 'install'
 
 node.default['image']['packages']['gcc-4.8-base']           = 'purge'
-node.default['image']['packages']['systemd-shim']           = 'purge'
-node.default['image']['packages']['libglib2.0-0']           = 'purge'
-node.default['image']['packages']['cgmanager']              = 'purge'
-node.default['image']['packages']['libcgmanager0']          = 'purge'
-node.default['image']['packages']['libffi6']                = 'purge'
-node.default['image']['packages']['libnih-dbus1']           = 'purge'
-node.default['image']['packages']['libnih1']                = 'purge'
 node.default['image']['packages']['debconf-i18n']           = 'purge'
 node.default['image']['packages']['libtext-iconv-perl']     = 'purge'
 node.default['image']['packages']['libtext-wrapi18n-perl']  = 'purge'
 node.default['image']['packages']['liblocale-gettext-perl'] = 'purge'
 node.default['image']['packages']['libtext-charwidth-perl'] = 'purge'
 
-node.default['image']['systemd']['getty@tty1.service']         = 'disable'
-node.default['image']['systemd']['getty@tty2.service']         = 'enable'
 node.default['image']['systemd']['serial-getty@ttyS0.service'] = 'enable'
 node.default['image']['systemd']['syslog.socket']              = 'mask'
 node.default['image']['systemd']['hwclock-save.service']       = 'disable'
